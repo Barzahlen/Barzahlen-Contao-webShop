@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://phpunit.de/phpunit.xsd"
+         stopOnFailure="false"
+         strict="true"
+         processIsolation="true"
+         verbose="true"
+         syntaxCheck="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true">
+
+    <testsuite name="contao-webshop-barzahlen">
+        <directory suffix="Test.php">test</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <!-- don't check barzahlen sdk as it has its own test suite -->
+                <directory suffix=".php">src/plugins</directory>
+                <!-- don't need to check language files -->
+                <directory suffix=".php">src/system/modules/webShop/paymentModules/barzahlen/languages</directory>
+                <file>src/system/modules/webShop/paymentModules/barzahlen/PrepareForWidgetWrapper.php</file>
+                <file>src/system/modules/webShop/paymentModules/barzahlen/barzahlen.php</file>
+                <file>src/system/modules/webShop/ModuleBarzahlenIPN.php</file>
+                <!-- don't need to check include files -->
+                <file>src/system/modules/webShop/paymentModules/barzahlen/include.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="build/coverage" title="contao-webshop-barzahlen"
+             charset="UTF-8" yui="true" highlight="true"
+             lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+</phpunit>
